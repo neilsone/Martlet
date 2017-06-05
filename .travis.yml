@@ -1,13 +1,8 @@
-os:
-      - osx
-          - linux
 language: generic
 sudo: required
-dist: trusty
-osx_image: xcode8.3
-install:
-      - source ./Scripts/Travis/install.sh
+osx_image: xcode8
 script:
-      - ./Scripts/Travis/build-test.sh Martlet
+      - swift package generate-xcodeproj
+          - xcodebuild -scheme RequestBuilder -enableCodeCoverage YES test  # instead of swift test
 after_success:
-      - ./Scripts/Travis/report-coverage.sh
+      - bash <(curl -s https://codecov.io/bash)
