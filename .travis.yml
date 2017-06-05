@@ -15,3 +15,5 @@ script:
     - swift build
     - swift build -c release
     - swift test
+after_success:
+      - ./Scripts/Travis/report-coverage.sh
