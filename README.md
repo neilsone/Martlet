@@ -3,4 +3,4 @@ $ swift build -c release -Xswiftc -static-stdlib
 $ cd .build/release
 $ cp -f MartletCLI /usr/local/bin/martlet
 
-Travis 1
+Travis 2
