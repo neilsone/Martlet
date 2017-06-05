@@ -1,0 +1,13 @@
+os:
+    - osx
+    - linux
+language: generic
+sudo: required
+dist: trusty
+osx_image: xcode8.3
+install:
+    - source ./Scripts/Travis/install.sh
+script:
+    - ./Scripts/Travis/build-test.sh Zewo
+after_success:
+    - ./Scripts/Travis/report-coverage.sh
