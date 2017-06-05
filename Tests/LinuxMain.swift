@@ -1,6 +1,7 @@
 import XCTest
-@testable import MartletTests
+
+@testable import HTTPTests
 
 XCTMain([
-    testCase(MartletTests.allTests),
+    testCase(HTTPTests.allTests),
 ])

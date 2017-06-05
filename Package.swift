@@ -4,7 +4,16 @@ import PackageDescription
 
 let package = Package(
     name: "Martlet",
+    targets: [
+        Target(
+            name: "MartletCLI", 
+            dependencies: ["HTTP"]
+        ),
+        Target(name: "HTTP"),
+        Target(name: "Transport"),
+    ],
     dependencies: [
-        .Package(url: "https://github.com/neilsone/CLibdill.git", versions: Version(0,0,3)..<Version(1,0,0))
+            .Package(url: "https://github.com/IBM-Swift/BlueSocket", 
+            majorVersion: 0, minor: 12)
     ]
 )
