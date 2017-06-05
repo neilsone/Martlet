@@ -1,19 +1,13 @@
 os:
-    - linux
-    - osx
-language: node_js
+      - osx
+          - linux
+language: generic
 sudo: required
 dist: trusty
-osx_image: xcode8
-env:
-    #    - SWIFT_VERSION=3.0.2
-    - SWIFT_VERSION=3.1
+osx_image: xcode8.3
 install:
-    - eval "$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/02090c7ede5a637b76e6df1710e83cd0bbe7dcdf/swiftenv-install.sh)"
-    - npm install --global --no-optional dredd
+      - source ./Scripts/Travis/install.sh
 script:
-    - swift build
-    - swift build -c release
-    - swift test
+      - ./Scripts/Travis/build-test.sh Martlet
 after_success:
-    - ./Scripts/Travis/report-coverage.sh
+      - ./Scripts/Travis/report-coverage.sh
