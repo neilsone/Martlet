@@ -1,13 +1,16 @@
 os:
-    - osx
     - linux
-language: generic
+    - osx
+language: node_js
 sudo: required
 dist: trusty
-osx_image: xcode8.3
+osx_image: xcode8
+env:
+    - SWIFT_VERSION=3.0.2
+    - SWIFT_VERSION=3.1
 install:
-    - source ./Scripts/Travis/install.sh
+    - eval "$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/02090c7ede5a637b76e6df1710e83cd0bbe7dcdf/swiftenv-install.sh)"
+    - npm install --global --no-optional dredd
 script:
-    - ./Scripts/Travis/build-test.sh Zewo
-after_success:
-    - ./Scripts/Travis/report-coverage.sh
+    - swift test
+    - make test
