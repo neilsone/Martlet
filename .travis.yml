@@ -1,25 +1,13 @@
-matrix:
-    include:
-        - env: TEST="swift test" COV=no
-          os: linux
-        - env: TEST="swift test" COV=no
-          os: osx
-        - env: TEST="xcodebuild -scheme gaintext-engine -project gaintext-engine.xcodeproj test" COV=yes
-          os: osx
-          allow_failures:
-              - os: linux
-
-                language: generic
-                sudo: required
-                dist: trusty
-                osx_image: xcode8.3
-                install:
-                    - curl -sL https://gist.github.com/kylef/5c0475ff02b7c7671d2a/raw/621ef9b29bbb852fdfd2e10ed147b321d792c1e4/swiftenv-install.sh | bash
-                    - . ~/.swiftenv/init
-                    - swift --version || swiftenv install 3.1
-                    - swift package --version
-                    - swift package generate-xcodeproj --enable-code-coverage
-                script:
-                    - $TEST
-                after_success:
-                    - test "$COV" == "no" || bash <(curl -s https://codecov.io/bash) -t b692f18a-a479-476f-a123-e904945b3027
+os:
+  - osx
+  - linux
+language: generic
+sudo: required
+dist: trusty
+osx_image: xcode8.3
+install:
+  - source ./Scripts/Travis/install.sh
+script:
+  - ./Scripts/Travis/build-test.sh Martlet
+after_success:
+  - ./Scripts/Travis/report-coverage.sh
